@@ -2,18 +2,36 @@
 
 Canonical, centrally-hosted `security.txt` (RFC 9116) for The PA and its properties.
 
-Every domain and subdomain we operate redirects `/.well-known/security.txt` to the file hosted in this repository. This keeps contact and disclosure information current in one place rather than duplicated across many sites.
+Every domain and subdomain we operate redirects `/.well-known/security.txt` to the copy served at `https://security.thepa.com/.well-known/security.txt` (GitHub Pages, built from this repository). This keeps contact and disclosure information current in one place rather than duplicated across many sites.
 
 ## Files
 
 ```
 .well-known/
-  security.txt      # the live file, served via raw.githubusercontent.com or GitHub Pages
+  security.txt      # the live file, served via GitHub Pages
+pa-security-pubkey.asc  # security team PGP public key (referenced by the Encryption field)
+.nojekyll           # required: stops Pages/Jekyll dropping the .well-known directory
 ```
 
 ## How to report a vulnerability
 
-See the `Contact` and `Policy` fields in [`.well-known/security.txt`](.well-known/security.txt) for current reporting channels and our disclosure policy.
+See the `Contact` field in [`.well-known/security.txt`](.well-known/security.txt) for the current reporting channel.
+
+## Encrypting reports
+
+Reports can be encrypted to the security team's PGP key: [`pa-security-pubkey.asc`](pa-security-pubkey.asc)
+
+```
+PA Media Security Team <security-team@thepa.com>
+Fingerprint: CBC7 B8F1 D8F3 56A2 E4E3  EA42 413B 7BF0 12B2 8AFA
+Expires:     2028-10-01
+```
+
+Verify the fingerprint after importing (`gpg --import pa-security-pubkey.asc && gpg --fingerprint security-team@thepa.com`) before trusting the key.
+
+## Hosting
+
+Served by GitHub Pages from the `main` branch (root folder) on the custom domain `security.thepa.com`, with HTTPS enforced. Do not remove `.nojekyll`. Changes go live when merged to `main`.
 
 ## Why this repo is public
 
