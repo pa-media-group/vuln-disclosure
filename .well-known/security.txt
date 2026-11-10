@@ -1,5 +1,6 @@
 Contact: mailto:security-team@thepa.com
 Expires: 2027-09-30T23:59:59.000Z
 Encryption: https://security.thepa.com/pa-security-pubkey.asc
+Encryption: openpgp4fpr:CBC7B8F1D8F356A2E4E3EA42413B7BF012B28AFA
 Canonical: https://security.thepa.com/.well-known/security.txt
 Preferred-Languages: en
