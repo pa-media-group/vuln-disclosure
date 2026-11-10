@@ -6,20 +6,24 @@ Every domain and subdomain we operate redirects `/.well-known/security.txt` to t
 
 ## Files
 
+Only `docs/` is published. Everything else in the repo (this README, `.gitignore`) is not served.
+
 ```
-.well-known/
-  security.txt      # the live file, served via GitHub Pages
-pa-security-pubkey.asc  # security team PGP public key (referenced by the Encryption field)
-.nojekyll           # required: stops Pages/Jekyll dropping the .well-known directory
+docs/                       # the published site (GitHub Pages source)
+  .well-known/
+    security.txt            # the live file
+  pa-security-pubkey.asc    # security team PGP public key (referenced by the Encryption field)
+  .nojekyll                 # required: stops Pages/Jekyll dropping the .well-known directory
+  CNAME                     # required: custom domain security.thepa.com
 ```
 
 ## How to report a vulnerability
 
-See the `Contact` field in [`.well-known/security.txt`](.well-known/security.txt) for the current reporting channel.
+See the `Contact` field in [`docs/.well-known/security.txt`](docs/.well-known/security.txt) for the current reporting channel.
 
 ## Encrypting reports
 
-Reports can be encrypted to the security team's PGP key: [`pa-security-pubkey.asc`](pa-security-pubkey.asc)
+Reports can be encrypted to the security team's PGP key: [`pa-security-pubkey.asc`](docs/pa-security-pubkey.asc)
 
 ```
 PA Media Security Team <security-team@thepa.com>
@@ -27,11 +31,15 @@ Fingerprint: CBC7 B8F1 D8F3 56A2 E4E3  EA42 413B 7BF0 12B2 8AFA
 Expires:     2028-10-01
 ```
 
-Verify the fingerprint after importing (`gpg --import pa-security-pubkey.asc && gpg --fingerprint security-team@thepa.com`) before trusting the key.
+Verify the fingerprint after importing (`gpg --import docs/pa-security-pubkey.asc && gpg --fingerprint security-team@thepa.com`) before trusting the key.
 
 ## Hosting
 
-Served by GitHub Pages from the `main` branch (root folder) on the custom domain `security.thepa.com`, with HTTPS enforced. Do not remove `.nojekyll`. Changes go live when merged to `main`.
+Served by GitHub Pages from the `main` branch, `/docs` folder, on the custom domain `security.thepa.com`, with HTTPS enforced. Changes go live when merged to `main`.
+
+- Only put files meant to be public in `docs/`; everything in it is published.
+- Do not remove `docs/.nojekyll` or `docs/CNAME`. `main` is protected, so GitHub cannot re-create `CNAME` itself.
+- The public URLs (`/.well-known/security.txt`, `/pa-security-pubkey.asc`) do not change when files move within the repo.
 
 ## Why this repo is public
 
